@@ -1,4 +1,4 @@
-package com.springapi.beyblade.models;
+package com.springapi.beyblade.models.DTO;
 
 public class BeybladeCreateDTO {
 

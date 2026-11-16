@@ -23,11 +23,11 @@ public class SystemModel {
     @OneToMany(mappedBy = "system")
     private List<BeybladeModel> beyblades;
 
-    public Long getIdseries(){
+    public Long getIdsystem(){
         return this.idsystem;
     }
 
-    public void setIdseries(Long idsystem){
+    public void setIdsystem(Long idsystem){
         this.idsystem = idsystem;
     }
 

@@ -42,6 +42,14 @@ public class BeybladeModel {
     @JoinColumn(name = "idsystem", nullable = false)
     private SystemModel system;
 
+    public Long getIdbeyblade(){
+        return this.idbeyblade;
+    }
+
+    public void setIdbeyblade(Long idbeyblade){
+        this.idbeyblade = idbeyblade;
+    }
+
     public String getName(){
         return this.name; 
     }

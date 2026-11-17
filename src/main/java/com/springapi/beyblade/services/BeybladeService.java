@@ -61,10 +61,13 @@ public class BeybladeService {
         });
     }
 
-    public BeybladeModel createBeyblade(BeybladeCreateDTO bey){
+    public Boolean createBeyblade(BeybladeCreateDTO bey){
         BeybladeModel newBey = new BeybladeModel();
-        SystemModel system = systemRepo.findById(bey.getIdSystem()).get();
-        SeriesModel series = seriesRepo.findById(bey.getIdseries()).get();
+         SystemModel system = systemRepo.findById(bey.getIdSystem()).orElse(null);
+        SeriesModel series = seriesRepo.findById(bey.getIdseries()).orElse(null);
+        if(system == null || series == null){
+            return false;
+        }
         newBey.setName(bey.getName());
         newBey.setJpname(bey.getJpname());
         newBey.setSpin(bey.getSpin());
@@ -73,21 +76,39 @@ public class BeybladeService {
         newBey.setImageURL(bey.getImageURL());
         newBey.setSystem(system);
         newBey.setSeries(series);
-        return beyRepo.save(newBey);
+        try{
+            beyRepo.save(newBey); 
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
-    public BeybladeModel updateBeyblade(BeybladeModel bey, Long id){
-        BeybladeModel currentBey = beyRepo.findById(id).get();
+    public String updateBeyblade(BeybladeCreateDTO bey, Long id){
+        BeybladeModel currentBey = beyRepo.findById(id).orElse(null);
+        SystemModel system = systemRepo.findById(bey.getIdSystem()).orElse(null);
+        SeriesModel series = seriesRepo.findById(bey.getIdseries()).orElse(null);
+        if(currentBey == null){
+            return "Beyblade not found";
+        }
+        if(system == null || series == null){
+            return "The system or series specified does not exist";
+        }
         currentBey.setName(bey.getName());
         currentBey.setJpname(bey.getJpname());
-        currentBey.setSeries(bey.getSeries());
-        currentBey.setSystem(bey.getSystem());
+        currentBey.setSeries(series);
+        currentBey.setSystem(system);
         currentBey.setSpin(bey.getSpin());
         currentBey.setType(bey.getType());
         currentBey.setBlader(bey.getBlader());
         currentBey.setImageURL(bey.getImageURL());
+        try{
+            beyRepo.save(currentBey);
+            return "Beyblade successfully updated";
+        } catch(Exception e){
+            return "Couldn't update bey";
+        }
 
-        return currentBey;
     }
 
     public Boolean deleteBeyblade(Long id){

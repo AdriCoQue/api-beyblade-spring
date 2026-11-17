@@ -3,7 +3,6 @@ package com.springapi.beyblade.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springapi.beyblade.models.BeybladeModel;
 import com.springapi.beyblade.models.DTO.BeybladeCreateDTO;
 import com.springapi.beyblade.models.DTO.BeybladeDTO;
 import com.springapi.beyblade.services.BeybladeService;
@@ -43,18 +42,28 @@ public class BeybladeController {
     }
 
     @PostMapping
-    public BeybladeModel createNeyBeyblade(@RequestBody BeybladeCreateDTO newBey) {        
-        return beyService.createBeyblade(newBey);
+    public String createNeyBeyblade(@RequestBody BeybladeCreateDTO newBey) {        
+        Boolean res = beyService.createBeyblade(newBey);
+        if(res){
+            return "Beyblade created successfully";
+        } else {
+            return "Couldn't create Beyblade";
+        }
     }
 
     @PutMapping(path = "/{id}")
-    public BeybladeModel updateBeyblade(@PathVariable Long id, @RequestBody BeybladeModel updatedBey) {    
+    public String updateBeyblade(@PathVariable Long id, @RequestBody BeybladeCreateDTO updatedBey) {    
         return beyService.updateBeyblade(updatedBey, id);
     }
 
     @DeleteMapping(path = "/{id}")
-    public Boolean deleteBeyblade(@PathVariable Long id){
-        return beyService.deleteBeyblade(id);
+    public String deleteBeyblade(@PathVariable Long id){
+        Boolean res = beyService.deleteBeyblade(id);
+        if(res){
+            return "Beyblade deleted successfully";
+        }else {
+            return "Couldn't delete Beyblade";
+        }
     }
     
     

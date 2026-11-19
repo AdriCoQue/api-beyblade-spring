@@ -40,6 +40,8 @@ public class BeybladeService {
             b.setSystem(bey.getSystem().getName());
             b.setBlader(bey.getBlader());
             b.setImageURL(bey.getImageURL());
+            b.setIdseries(bey.getSeries().getIdseries());
+            b.setIdsystem(bey.getSystem().getIdsystem());
             return b;
         }).toList();
     }
@@ -57,6 +59,8 @@ public class BeybladeService {
             b.setSystem(bey.getSystem().getName());
             b.setBlader(bey.getBlader());
             b.setImageURL(bey.getImageURL());
+            b.setIdseries(bey.getSeries().getIdseries());
+            b.setIdsystem(bey.getSystem().getIdsystem());
             return b;
         });
     }

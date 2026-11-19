@@ -11,6 +11,8 @@ public class BeybladeDTO {
     private String system;
     private String blader;
     private String imageURL;
+    private Long idseries;
+    private Long idsystem;
 
     public Long getIdbeyblade(){
         return this.idbeyblade;
@@ -82,5 +84,21 @@ public class BeybladeDTO {
 
     public void setImageURL(String imageURL){
         this.imageURL = imageURL;
+    }
+
+    public Long getIdseries(){
+        return this.idseries;
+    }
+
+    public void setIdseries(Long idseries){
+        this.idseries = idseries;
+    }
+
+    public Long getIdsystem(){
+        return this.idsystem;
+    }
+
+    public void setIdsystem(Long idsystem){
+        this.idsystem = idsystem;
     }
 }
